@@ -37,9 +37,9 @@ export function LoginForm() {
             },
             onSuccess: (response) => {
                 // console.log(response);
-                alert("Sign up successful");
+                alert("Sign in successful");
                 setLoading(false);
-                router.push("/auth");
+                router.push("/dashboard");
             }, onError: (error) => {
                 setLoading(false);
                 alert(error.error.message);
@@ -47,6 +47,7 @@ export function LoginForm() {
         });
         if (error) {
             console.error(error);
+            setLoading(false);
             return;
         }
         console.log(data);

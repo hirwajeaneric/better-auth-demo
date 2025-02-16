@@ -41,12 +41,13 @@ export function SignUpForm() {
                 setLoading(false);
                 router.push("/auth");
             }, onError: (error) => {
-                setLoading(false);
                 alert(error.error.message);
+                setLoading(false);
             },
         })
         if (error) {
             console.error(error);
+            setLoading(false);
             return;
         }
         console.log(data);
