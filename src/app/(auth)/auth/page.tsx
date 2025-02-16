@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import Link from "next/link";
 import { FaGithub } from "react-icons/fa6";
@@ -11,9 +10,9 @@ import {
 } from "@/components/ui/card"
 import { LoginForm } from "@/components/auth/login-form"
 
-export default function page({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
+export default function page() {
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className="flex flex-col gap-6">
       <Card>
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Welcome back to BetterAuth Demo</CardTitle>
