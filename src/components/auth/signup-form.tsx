@@ -40,6 +40,7 @@ export function SignUpForm() {
                 setLoading(false);
                 router.push("/auth");
             }, onError: (error) => {
+                setLoading(false);
                 alert(error.error.message);
             },
         })

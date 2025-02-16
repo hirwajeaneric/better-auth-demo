@@ -8,9 +8,11 @@ import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { SignInFormData, signInFormSchema } from "@/types";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function LoginForm() {
-
+    const router = useRouter();
+    const [loading, setLoading] = useState(false);
     const form = useForm<SignInFormData>({
         resolver: zodResolver(signInFormSchema),
         defaultValues: {
@@ -26,6 +28,20 @@ export function LoginForm() {
             password,
             callbackURL: "/dashboard",
             rememberMe: false,
+        }, {
+            onRequest: (request) => {
+                // console.log(request);
+                setLoading(true);
+            },
+            onSuccess: (response) => {
+                // console.log(response);
+                alert("Sign up successful");
+                setLoading(false);
+                router.push("/auth");
+            }, onError: (error) => {
+                setLoading(false);
+                alert(error.error.message);
+            },
         });
         if (error) {
             console.error(error);
@@ -68,7 +84,7 @@ export function LoginForm() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Submit</Button>
+                <Button type="submit" disabled={loading}>{loading ? "Loading..." : "Submit"}</Button>
             </form>
         </Form>
     )
