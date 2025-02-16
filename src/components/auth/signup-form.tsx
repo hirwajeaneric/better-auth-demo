@@ -29,6 +29,7 @@ export function SignUpForm() {
             callbackURL: "/auth"
         }, {
             onRequest: (request) => {
+                console.log(request);
                 setLoading(true);
             },
             onSuccess: (response) => {
