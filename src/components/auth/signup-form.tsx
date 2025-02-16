@@ -8,9 +8,11 @@ import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { SignUpFormData, signUpFormSchema } from "@/types";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export function SignUpForm() {
     const [loading, setLoading] = useState(false);
+    const router = useRouter();
     const form = useForm<SignUpFormData>({
         resolver: zodResolver(signUpFormSchema),
         defaultValues: {
@@ -29,17 +31,18 @@ export function SignUpForm() {
             callbackURL: "/auth"
         }, {
             onRequest: (request) => {
-                console.log(request);
+                // console.log(request);
                 setLoading(true);
             },
             onSuccess: (response) => {
+                // console.log(response);
+                alert("Sign up successful");
                 setLoading(false);
-                console.log(response);
-            },
-            onError: (error) => {
+                router.push("/auth");
+            }, onError: (error) => {
                 alert(error.error.message);
             },
-        }) 
+        })
         if (error) {
             console.error(error);
             return;
